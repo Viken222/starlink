@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Starlink LTD - Data Packages</title>
+  <meta name="description" content="Buy Starlink high-speed data bundles via M-PESA" />
+  <style>
+    :root {
+      --starlink-black: #000000;
+      --starlink-white: #ffffff;
+      --safaricom-green: #00a650;
+      --light-gray: #f5f5f5;
+      --dark-gray: #222222;
+    }
+    body {
+      margin: 0;
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+      background: var(--starlink-black);
+      color: white;
+      line-height: 1.5;
+    }
+    header {
+      background: var(--starlink-black);
+      text-align: center;
+      padding: 20px;
+      border-bottom: 1px solid #333;
+    }
+    h1 {
+      margin: 0;
+      font-size: 24px;
+      font-weight: 700;
+    }
+    .subtitle {
+      color: var(--safaricom-green);
+      font-size: 14px;
+      margin-top: 5px;
+    }
+    .partner {
+      font-size: 12px;
+      color: #999;
+      margin-top: 10px;
+    }
+    .container {
+      max-width: 480px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+    .packages {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      margin-top: 20px;
+    }
+    .package {
+      background: var(--dark-gray);
+      border-radius: 12px;
+      padding: 20px;
+      text-align: center;
+      cursor: pointer;
+      transition: all 0.2s;
+      border: 2px solid transparent;
+    }
+    .package:hover {
+      border-color: var(--safaricom-green);
+    }
+    .package.best {
+      border: 2px solid var(--safaricom-green);
+      position: relative;
+      overflow: hidden;
+    }
+    .best::before {
+      content: "BEST VALUE";
+      position: absolute;
+      top: 8px;
+      right: -40px;
+      background: var(--safaricom-green);
+      color: black;
+      font-size: 11px;
+      font-weight: bold;
+      padding: 4px 40px;
+      transform: rotate(45deg);
+    }
+    .duration {
+      font-size: 18px;
+      font-weight: 600;
+    }
+    .data {
+      font-size: 28px;
+      font-weight: bold;
+      margin: 8px 0;
+    }
+    .price {
+      font-size: 24px;
+      color: var(--safaricom-green);
+      font-weight: bold;
+    }
+    .overlay {
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(0,0,0,0.9);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 100;
+      padding: 20px;
+    }
+    .modal {
+      background: #111;
+      border-radius: 16px;
+      width: 100%;
+      max-width: 400px;
+      padding: 24px;
+      text-align: center;
+      border: 1px solid #333;
+    }
+    .close {
+      position: absolute;
+      top: 15px;
+      right: 20px;
+      font-size: 30px;
+      cursor: pointer;
+    }
+    .steps {
+      text-align: left;
+      margin: 20px 0;
+      font-size: 16px;
+    }
+    .step {
+      margin: 16px 0;
+    }
+    .till {
+      background: #000;
+      color: var(--safaricom-green);
+      font-size: 28px;
+      font-weight: bold;
+      padding: 12px;
+      border-radius: 8px;
+      margin: 20px 0;
+      letter-spacing: 3px;
+    }
+    .copy-btn {
+      background: var(--safaricom-green);
+      color: black;
+      border: none;
+      padding: 12px 24px;
+      font-size: 16px;
+      font-weight: bold;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+    .amount-display {
+      font-size: 20px;
+      color: var(--safaricom-green);
+      margin: 15px 0;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>STARLINK LTD</h1>
+    <div class="subtitle">High-Speed Satellite Internet</div>
+    <div class="partner">In partnership with Safaricom</div>
+  </header>
+
+  <div class="container">
+    <h2 style="text-align:center;">Buy Starlink Data Bundles</h2>
+    <p style="text-align:center; color:#aaa; font-size:14px;">Pay instantly via M-PESA</p>
+
+    <div class="packages">
+      <div class="package" onclick="showPayment('85', '24 Hours - 7 GB', '85')">
+        <div class="duration">24 HOURS</div>
+        <div class="data">7 GB</div>
+        <div class="price">KSh 85</div>
+      </div>
+
+      <div class="package" onclick="showPayment('89', '7 Days - 12 GB', '89')">
+        <div class="duration">7 DAYS</div>
+        <div class="data">12 GB</div>
+        <div class="price">KSh 89</div>
+      </div>
+
+      <div class="package" onclick="showPayment('110', '14 Days - 22 GB', '110')">
+        <div class="duration">14 DAYS</div>
+        <div class="data">22 GB</div>
+        <div class="price">KSh 110</div>
+      </div>
+
+      <div class="package best" onclick="showPayment('150', '21 Days - 35 GB', '150')">
+        <div class="duration">21 DAYS</div>
+        <div class="data">35 GB</div>
+        <div class="price">KSh 150</div>
+      </div>
+
+      <div class="package" onclick="showPayment('5150', '30 Days - 50 GB', '5150')">
+        <div class="duration">30 DAYS</div>
+        <div class="data">50 GB</div>
+        <div class="price">KSh 5,150</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Payment Modal -->
+  <div class="overlay" id="overlay" onclick="closeModal()">
+    <div class="modal" onclick="event.stopPropagation()">
+      <span class="close" onclick="closeModal()">&times;</span>
+      <h2>Lipa na M-PESA</h2>
+      <div class="amount-display" id="amountText">KSh --</div>
+      <div class="till">456456</div>
+      <button class="copy-btn" onclick="copyTill()">Copy Till Number</button>
+      <div class="steps">
+        <div class="step">1. Go to <strong>M-PESA</strong> menu</div>
+        <div class="step">2. Select <strong>Lipa na M-PESA</strong></div>
+        <div class="step">3. Choose <strong>Pay Bill</strong></div>
+        <div class="step">4. Enter Business No: <strong>456456</strong></div>
+        <div class="step">5. Account No: <strong>Your Phone Number</strong></div>
+        <div class="step">6. Enter amount: <strong id="amountStep">--</strong></div>
+        <div class="step">7. Enter PIN and Send</div>
+      </div>
+      <p style="font-size:12px; color:#888;">
+        You will receive your Starlink data bundle instantly after payment.
+      </p>
+    </div>
+  </div>
+
+  <script>
+    function showPayment(amount, title, stepAmount) {
+      document.getElementById('amountText').textContent = 'KSh ' + amount;
+      document.getElementById('amountStep').textContent = amount;
+      document.getElementById('overlay').style.display = 'flex';
+    }
+    function closeModal() {
+      document.getElementById('overlay').style.display = 'none';
+    }
+    function copyTill() {
+      navigator.clipboard.writeText('456456');
+      alert('Till number 456456 copied to clipboard!');
+    }
+    // Close modal when pressing Escape
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape') closeModal();
+    });
+  </script>
+</body>
+</html>
